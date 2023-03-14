@@ -20,6 +20,7 @@ import org.springframework.web.filter.CorsFilter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 
 @RefreshScope
 @Configuration
@@ -74,7 +75,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Bean
     public JwtAccessTokenConverter accessTokenConverter(){
         JwtAccessTokenConverter tokenConverter = new JwtAccessTokenConverter();
-        tokenConverter.setSigningKey(jwtKey);
+        tokenConverter.setSigningKey(Base64.getEncoder().encodeToString(jwtKey.getBytes()));
         return tokenConverter;
     }
 }
